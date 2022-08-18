@@ -1,4 +1,5 @@
 const express = require('express')
+const faker = require('faker-br')
 const app = express()
 const porta = process.env.APP_PORT || 3000
 
@@ -14,6 +15,9 @@ const mysql = require('mysql')
 const connection = mysql.createConnection(config)
 
 app.get('/', (req, res) => {
+  const name = faker.name.findName()
+
+  connection.query(`INSERT INTO people (name) VALUES ('${name}')`)
 
   connection.query(`SELECT name FROM people`, (error, results, fields) => {
     res.send(`
