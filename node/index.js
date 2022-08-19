@@ -17,6 +17,10 @@ const connection = mysql.createConnection(config)
 app.get('/', (req, res) => {
   const name = faker.name.findName()
 
+  connection.query(`CREATE TABLE IF NOT EXISTS people(id int not null auto_increment, name varchar(255), primary key(id));`)
+
+  connection.query(`use nodedb;`)
+
   connection.query(`INSERT INTO people (name) VALUES ('${name}')`)
 
   connection.query(`SELECT name FROM people`, (error, results, fields) => {
