@@ -3,6 +3,8 @@ version: '3'
 services:
 
   nginx:
+    build: 
+      context: nginx
     image: nginx-davi
     container_name: nginx-davi
     networks:
@@ -10,6 +12,8 @@ services:
     ports:
       - "8080:80"
   app:
+    build:
+      context: node
     image: node-davi
     container_name: app
     networks:
